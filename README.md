@@ -2,7 +2,10 @@
 VS Code extension used in the SoftVR user study (https://git.informatik.uni-leipzig.de/SWS/softvr-user-study)
 
 ## Installation
+You must install the extension and run two local servers to be able to use all features of GLIMPS.
+The two servers can be run using the saved docker images provided in `./servers`.
 
+### Extension
 The following commands will create the VSIX package containing the extension:
 ```
 npm install
@@ -13,7 +16,21 @@ For installing the extension in VS Code use:
 ```
 code --install-extension perf-debug-0.0.1.vsix
 ```
-You may need to reload the VS Code window.
+You may need to reload the VS Code window.<br>
+
+### Hotspot Diff Server
+Inside the root folder run:
+```
+docker load -i ./servers/hotspot-diff-server.tar
+```
+This adds the image to your local docker images.
+
+### Joana Slicer Server
+Inside the root folder run:
+```
+docker load -i ./servers/joana-slicer-server.tar
+```
+This adds the image to your local docker images.
 
 ## Usage
 GLIMPS can only be used with the following three software systems.
@@ -25,9 +42,15 @@ GLIMPS can only be used with the following three software systems.
 1. Clone one of the listed repositories.
 2. Open the repository in VS Code.
 3. Switch to the <b>user-study</b> branch.
-4. Press `Ctrl+Shift+P` or `F1` and select `Perf Debug: Configuration Dialog` <br>
+4. Start the two servers with 
+```
+docker run -it -p 8001:8001 hotspot-diff-server
+docker run -it -p 8002:8002 -p 8003:8003 -p 8025:8025 joana-slicer-server
+```
+5. Press `Ctrl+Shift+P` or `F1` and select `Perf Debug: Configuration Dialog` <br>
 
 ![image.png](./images/start-command.png)<br>
+
 
 ## Known issues
 The extension does not start on Ubuntu 21.10 and 22.04 (but 20.04 is fine) in combination
