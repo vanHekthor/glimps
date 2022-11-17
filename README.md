@@ -15,3 +15,7 @@ code --install-extension perf-debug-0.0.1.vsix
 ```
 You may need to reload the VS Code window.
 
+## Known issues
+The extension does not start on Ubuntu 21.10 and 22.04 (but 20.04 is fine) in combination
+with VS Code version 1.62+ (october 2021 and newer).
+When working on Ubuntu 21.10+, we recommend to install the VS Code version 1.61 (https://code.visualstudio.com/updates/v1_61).
