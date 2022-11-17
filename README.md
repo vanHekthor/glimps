@@ -1,4 +1,5 @@
 # GLIMPS
+![image.png](./images/show-pic.png)
 VS Code extension used in the SoftVR user study (https://git.informatik.uni-leipzig.de/SWS/softvr-user-study)
 
 ## Installation
@@ -51,6 +52,13 @@ docker run -it -p 8002:8002 -p 8003:8003 -p 8025:8025 joana-slicer-server
 
 ![image.png](./images/start-command.png)<br>
 
+### Hotspot Diff (works only if the <b>hotspot diff server</b> runs)
+
+![image.png](./images/hotspot-diff.png)
+
+### Sliced Call Graph (works only if the <b>joana slicer server</b> runs)
+
+![image.png](./images/call-graph.png)
 
 ## Known issues
 The extension does not start on Ubuntu 21.10 and 22.04 (but 20.04 is fine) in combination
