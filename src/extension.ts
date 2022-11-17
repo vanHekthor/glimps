@@ -31,6 +31,9 @@ let NAMES_2_CONFIGS: string | undefined = undefined;
 let NAMES_2_PERF_MODELS: string = '';
 let NAMES_2_LOCAL_MODELS: string = '';
 
+//Create output channel
+let outputLog = vscode.window.createOutputChannel("GLIMPS");
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -592,6 +595,15 @@ function _slicing(context: vscode.ExtensionContext) {
                         lines.push(+commonSources[option][1]);
                     });
 
+                    outputLog.appendLine("---- SLICE REQUEST ----");
+                    const requestJson = {
+                        sourceClass: (commonSources[message.selectedOptions[0]][2].replace(regex, '/') + '.java'),
+                        sourceLines: lines,
+                        targetClass: targetClass,
+                        targetLines: target,
+                    };
+                    outputLog.appendLine(JSON.stringify(requestJson, null,"  "));
+
                     const res = request('POST', 'http://localhost:' + port + '/slice',
                         {
                             json: {
@@ -959,6 +971,15 @@ function _perfProfiles(context: vscode.ExtensionContext) {
                     }
                     const config1 = message.configs[0];
                     const config2 = message.configs[1] ? message.configs[1] : message.configs[0];
+
+                    outputLog.appendLine("---- HOTSPOT DIFF REQUEST ----");
+                    const requestJson = {
+                        programName: programName,
+                        config1: config1,
+                        config2: config2
+                    };
+                    outputLog.appendLine(JSON.stringify(requestJson, null, "  "));
+
                     const res = request('POST', 'http://localhost:8001/diff',
                         {
                             json: {
@@ -1132,7 +1153,7 @@ function getHotspotDiffContent(rawConfigs: string[], names2ConfigsRaw: any, meth
                     },
                     columns: [
                         { title: "Options", field: "option", sorter: "string", formatter: formatInteractions }, 
-                        { title: "Influence (s)", field: "influence", sorter: influenceSort, hozAlign:"right" },
+                        { title: "Influence (Ws)", field: "influence", sorter: influenceSort, hozAlign:"right" },
                         { formatter:optionsInfluenceButton, hozAlign:"center", cellClick:openInfluence },
                         { title: "Change",  field: "change" },
                     ],
@@ -1729,7 +1750,7 @@ function getGlobalModelContent(names2PerfModelsRaw: any, rawConfigs: string[], n
                     maxHeight:"300px",
                     columns: [
                         { title: "Influenced Hot Spot", field: "methods", sorter: "string" }, 
-                        { title: "Influence (s)",  field: "influence",  sorter: influenceSort, hozAlign:"right" },
+                        { title: "Influence (Ws)",  field: "influence",  sorter: influenceSort, hozAlign:"right" },
                         { formatter:optionsInfluenceButton, hozAlign:"center", cellClick:openFile },
                         { title: "method",  field: "method" },
                     ],
@@ -1772,7 +1793,7 @@ function getGlobalModelContent(names2PerfModelsRaw: any, rawConfigs: string[], n
                     },
                     columns: [
                         { title: "Options", field: "option", sorter: "string", formatter: customFormatter }, 
-                        { title: "Influence (s)",  field: "influence",  sorter: influenceSort, hozAlign:"right" },
+                        { title: "Influence (Ws)",  field: "influence",  sorter: influenceSort, hozAlign:"right" },
                         { title: "Change",  field: "change" },
                     ],
                     rowSelectionChanged:selectInfluence
@@ -1950,10 +1971,10 @@ function getGlobalModelContent(names2PerfModelsRaw: any, rawConfigs: string[], n
 
                     let times = "<b>Execution time:</b> " + (+names2DefaultTimes[config]).toFixed(2);
                     if(config === compare) {
-                        times = times.concat(" seconds");
+                        times = times.concat(" Ws");
                     }
                     else {
-                        times = times.concat(" seconds vs. " + (+names2DefaultTimes[compare]).toFixed(2) + " seconds");
+                        times = times.concat(" Ws vs. " + (+names2DefaultTimes[compare]).toFixed(2) + " Ws");
                     }
                     document.getElementById("selected-config-time").innerHTML = times;
                    
