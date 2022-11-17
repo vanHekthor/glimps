@@ -27,7 +27,7 @@ GLIMPS can only be used with the following three software systems.
 3. Switch to the <b>user-study</b> branch.
 4. Press `Ctrl+Shift+P` or `F1` and select `Perf Debug: Configuration Dialog` <br>
 
-![image.png](./image.png)<br>
+![image.png](./images/start-command.png)<br>
 
 ## Known issues
 The extension does not start on Ubuntu 21.10 and 22.04 (but 20.04 is fine) in combination
