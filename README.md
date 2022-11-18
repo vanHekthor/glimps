@@ -2,6 +2,8 @@
 ![image.png](./images/show-pic.png)
 VS Code extension used in the SoftVR user study (https://git.informatik.uni-leipzig.de/SWS/softvr-user-study)
 
+Modified version of the original repository (https://github.com/miguelvelezmj25/glimps).
+
 ## Installation
 You must install the extension and run two local servers to be able to use all features of GLIMPS.
 The two servers can be run using the saved docker images provided in `./servers`.
