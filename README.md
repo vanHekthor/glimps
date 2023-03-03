@@ -41,7 +41,7 @@ docker load -i ./servers/joana-slicer-server.tar
 This adds the image to your local docker images.
 
 ## Usage
-GLIMPS can only be used with the following three software systems.
+As of now, GLIMPS can only be used with the following three software systems, because only those contain the required resources (i.e. profiler measurements, ML models, program slices):
 - Example System: https://git.informatik.uni-leipzig.de/qb19zexe/perf-debug-config
 - Density Converter: https://git.informatik.uni-leipzig.de/qb19zexe/density-converter.git
 - Berkeley DB: https://git.informatik.uni-leipzig.de/qb19zexe/berkeley-db.git
