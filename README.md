@@ -1,12 +1,17 @@
 # GLIMPS
-![image.png](./images/show-pic.png)
-VS Code extension used in the SoftVR user study (https://git.informatik.uni-leipzig.de/SWS/softvr-user-study)
+A research tool for debugging performance in software systems.
 
-Modified version of the original repository (https://github.com/miguelvelezmj25/glimps).
+![image.png](./images/show-pic.png)
+Modified and easily reproducible version of the original tool (https://github.com/miguelvelezmj25/glimps).
+
+## Features
+- <b>Influencing Options</b>: Displaying the options with the biggest impact on performance.
+- <b>Option Hotspots</b>: Show where in the code the influencing options effect the performance.
+- <b>Option-Hotspot Trace</b>: Reduce the codebase to the parts which are effected by an option.
 
 ## Installation
 You must install the extension and run two local servers to be able to use all features of GLIMPS.
-The two servers can be run using the saved docker images provided in `./servers`.
+The two servers can be run using the docker images provided in `./servers`.
 
 ### Extension
 The following commands will create the VSIX package containing the extension:
@@ -54,11 +59,11 @@ docker run -it -p 8002:8002 -p 8003:8003 -p 8025:8025 joana-slicer-server
 
 ![image.png](./images/start-command.png)<br>
 
-### Hotspot Diff (works only if the <b>hotspot diff server</b> runs)
+### Hotspot View (works only if the <b>hotspot diff server</b> runs)
 
 ![image.png](./images/hotspot-diff.png)
 
-### Sliced Call Graph (works only if the <b>joana slicer server</b> runs)
+### Option-Hotspot Trace (works only if the <b>joana slicer server</b> runs)
 
 ![image.png](./images/call-graph.png)
 
